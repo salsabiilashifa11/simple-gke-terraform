@@ -3,18 +3,18 @@ resource "google_service_account" "kubernetes" {
 }
 
 resource "google_container_node_pool" "general" {
-  name = "general"
-  cluster = google_container_cluster.primary.id
+  name       = "general"
+  cluster    = google_container_cluster.primary.id
   node_count = 1
 
   management {
-    auto_repair = true
+    auto_repair  = true
     auto_upgrade = true
   }
 
   node_config {
-    preemptible = false
-    machine_type = "e2-small"
+    preemptible     = false
+    machine_type    = "e2-small"
     service_account = google_service_account.kubernetes.email
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
@@ -24,11 +24,11 @@ resource "google_container_node_pool" "general" {
 }
 
 resource "google_container_node_pool" "spot" {
-  name = "spot"
+  name    = "spot"
   cluster = google_container_cluster.primary.id
 
   management {
-    auto_repair = true
+    auto_repair  = true
     auto_upgrade = true
   }
 
@@ -38,12 +38,12 @@ resource "google_container_node_pool" "spot" {
   }
 
   node_config {
-    preemptible = true
+    preemptible  = true
     machine_type = "e2-small"
-    
+
     taint {
-      key = "instance_type"
-      value = "spot"
+      key    = "instance_type"
+      value  = "spot"
       effect = "NO_SCHEDULE"
     }
 
@@ -52,5 +52,5 @@ resource "google_container_node_pool" "spot" {
       "https://www.googleapis.com/auth/cloud-platform"
     ]
   }
-  
+
 }

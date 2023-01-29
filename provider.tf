@@ -1,7 +1,7 @@
 # Declaring main provider
 provider "google" {
   project = "shifa-personal-project"
-  region = "asia-southeast2"
+  region  = "asia-southeast2"
 }
 
 # Declaring Terraform specifig config
@@ -12,7 +12,7 @@ terraform {
   }
   required_providers {
     google = {
-      source = "hashicorp/google"
+      source  = "hashicorp/google"
       version = "~> 4.0"
     }
   }
